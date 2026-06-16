@@ -34,7 +34,7 @@ jobs:
         run: ls -lah
         
       - name: Mostrar debug
-        run: cat debug.txt | head -50
+        run: cat debug.txt | head -100
 
       - name: Commit JSON
         run: |
