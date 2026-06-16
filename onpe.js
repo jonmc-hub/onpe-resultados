@@ -16,36 +16,19 @@ const fs = require('fs');
     }
   );
 
-  const participantes = await page.evaluate(async () => {
+  const texto = await page.evaluate(async () => {
 
     const r = await fetch(
       '/presentacion-backend/resumen-general/participantes?idEleccion=10&tipoFiltro=eleccion'
     );
 
-    return await r.json();
+    return await r.text();
 
   });
 
-  const totales = await page.evaluate(async () => {
+  fs.writeFileSync('debug.txt', texto);
 
-    const r = await fetch(
-      '/presentacion-backend/resumen-general/totales?idEleccion=10&tipoFiltro=eleccion'
-    );
-
-    return await r.json();
-
-  });
-
-  const salida = {
-    actualizado: new Date().toISOString(),
-    participantes,
-    totales
-  };
-
-  fs.writeFileSync(
-    'resultados.json',
-    JSON.stringify(salida, null, 2)
-  );
+  console.log(texto.substring(0,500));
 
   await browser.close();
 
