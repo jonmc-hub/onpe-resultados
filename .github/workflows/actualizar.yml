@@ -30,6 +30,12 @@ jobs:
 
       - run: node onpe.js
 
+      - name: Mostrar archivos
+        run: ls -lah
+        
+      - name: Mostrar debug
+        run: cat debug.txt | head -50
+
       - name: Commit JSON
         run: |
           git config user.name github-actions
